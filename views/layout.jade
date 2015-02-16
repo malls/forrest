@@ -1,0 +1,10 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/styles/style.css')
+        script(src='/vendor/angular/angular.js')
+        script(src='/scripts/f.js')
+        script(src='/scripts/controllers/controller.js')
+    body(ng-app='app' ng-controller='Main')
+        block content
