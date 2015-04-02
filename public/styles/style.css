@@ -1,0 +1,9 @@
+body {
+    background: url('/images/08_diamondplate.png');
+    font-size: 1.5em;
+}
+
+img {
+    position: absolute;
+    right: 0;
+}

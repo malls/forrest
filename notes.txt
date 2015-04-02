@@ -1,0 +1,3 @@
+ffmpeg -i filename.mp4 frame_%05d.png
+
+convert frame_*.png -append output.jpg

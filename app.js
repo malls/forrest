@@ -8,7 +8,7 @@ var app = express();
 
 app.use(favicon(__dirname + '/public/ssstars_100.ico'));
 app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join('public')));
 
 app.use('/', routes);
 
