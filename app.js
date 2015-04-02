@@ -24,6 +24,6 @@ var server = app.listen(app.get('port'), function() {
     1) make favicon
     2) gulp?
     3) angular?
-    4) 
+    4) animate something
 
 */
