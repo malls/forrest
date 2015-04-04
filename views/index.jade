@@ -1,13 +1,23 @@
 extends layout
 
 block content
-    animator(bgurl="'/images/LOOK-11-54.jpg'" frames="54")
-    ul 
+    box(animator bgurl="/images/LOOK-11-54.jpg" frames="54")
+    ul
         li
-            a(href="/social") social
+            button(ng-click="show.social = !show.social") social
         li
-            a(href="/gifs") gifs
+            button(ng-click="show.sites = !show.sites") sites
         li
-            a(href="/sites") sites
+            button(ng-click="show.gifs = !show.gifs") gifs
         li
-            a(href="/bio") bio
+            button(ng-click="show.bio = !show.bio") bio
+
+    // ng-include(src="sites" ng-show="{{show.sites}}")
+    // ng-include(src="social" ng-show="{{show.social}}")
+    // ng-include(src="gifs" ng-show="{{show.gifs}}")
+    // ng-include(src="bio" ng-show="{{show.bio}}")
+
+    include social
+    include sites
+    include gifs
+    include bio

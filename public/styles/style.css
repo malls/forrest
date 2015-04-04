@@ -6,10 +6,31 @@ body {
 
 div {
     margin: 10px 10px 10px 10px;
-    border: 1px dotted cornflowerblue;
-    position: absolute;
-    right: 0;
     height: 100px;
     width: 100px;
-    background-position: 0px 0px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    display: inline;
+    padding-right: 19px;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-style: dotted;
+    border-width: 5px;
+}
+
+a:link {
+    color: pink;
+}
+
+a:visited {
+    color: cornflowerblue;
 }
