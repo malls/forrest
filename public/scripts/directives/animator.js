@@ -1,5 +1,5 @@
 angular.module('app')
-    .directive('animator', function animator ($timeout) {
+    .directive('animator', function animator ($interval) {
         return {
             restrict: 'A',
             link: function(scope, element, attrs) {
@@ -8,11 +8,11 @@ angular.module('app')
                 var xval = 0;
                 scope.bgurl = attrs.bgurl;
                 var url = 'url("' + attrs.bgurl + '")';
-                element.css('background-image', url);;
+                element.find('div').css('background-image', url);;
 
-                $timeout(function() {
-                    element.css('background-position-x', xval + 'px');;
-                    xval += 100;
+                $interval(function() {
+                    element.find('div').css('background-position-x', xval + 'px');;
+                    xval += 210;
                 }, 50);
             }
         }
