@@ -1,3 +1,4 @@
+// takes 3 params: frames, frame-width, bgurl
 angular.module('app')
     .directive('animator', function animator ($interval) {
         return {
@@ -12,7 +13,7 @@ angular.module('app')
 
                 $interval(function() {
                     element.find('div').css('background-position-x', xval + 'px');;
-                    xval += 210;
+                    xval += +attrs.frameWidth;
                 }, 50);
             }
         }
