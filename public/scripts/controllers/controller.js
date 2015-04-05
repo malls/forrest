@@ -4,7 +4,8 @@ angular.module('app')
             gifs: false,
             social: false,
             sites: false,
-            bio: false
+            bio: false,
+            persona: false
         }
 
     });
