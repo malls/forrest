@@ -1,6 +1,9 @@
 extends layout
 
 block content
+    box
+    box
+    box
     box(animator bgurl="/images/LOOK-11-54.jpg" frames="54")
     ul
         li
@@ -11,11 +14,6 @@ block content
             button(ng-click="show.gifs = !show.gifs") gifs
         li
             button(ng-click="show.bio = !show.bio") bio
-
-    // ng-include(src="sites" ng-show="{{show.sites}}")
-    // ng-include(src="social" ng-show="{{show.social}}")
-    // ng-include(src="gifs" ng-show="{{show.gifs}}")
-    // ng-include(src="bio" ng-show="{{show.bio}}")
 
     include social
     include sites
