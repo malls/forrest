@@ -5,7 +5,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Forrest Almasi <3 <3' });
+    res.render('parking');
+  // res.render('index', { title: 'Forrest Almasi <3 <3' });
 });
 
 router.get('/persona', function(req, res) {
