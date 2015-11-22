@@ -9,6 +9,6 @@
     "serve-favicon": "^2.2.0"
   },
   "scripts": {
-    "start": "node image-grabber.js && node app.js"
+    "start": "node app.js"
   }
 }

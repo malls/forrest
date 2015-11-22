@@ -1,5 +1,4 @@
 node_modules/
 public/vendor/
-public/images/
 .env
 npm-debug.log
