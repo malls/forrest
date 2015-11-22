@@ -1,11 +1,22 @@
 var express = require('express');
 var fs = require('fs-extended');
 var router = express.Router();
- 
+
+
+
+function getMarble() {
+    var files = fs.readdirSync('./public/images/marble/');
+    var index = Math.floor((Math.random() * (files.length - 1) + 1));
+    console.log(index)
+    return files[index];
+}
+
+console.log(getMarble());
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('parking');
+    var marble = getMarble();
+    res.render('parking', {marble: marble});
   // res.render('index', { title: 'Forrest Almasi <3 <3' });
 });
 
