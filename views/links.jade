@@ -1,0 +1,9 @@
+extends main
+
+block content
+
+    h2= heading
+    ul
+        each link in links
+            li
+                a(href='#{link.url}') #{link.text}

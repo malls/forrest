@@ -1,14 +1,17 @@
 {
   "name": "forrestalmasi",
   "dependencies": {
+    "clean-css": "^3.4.8",
     "debug": "^2.1.1",
     "express": "^4.11.2",
     "fs-extended": "^0.2.0",
     "jade": "^1.9.2",
+    "pg": "^4.4.3",
     "request": "^2.67.0",
     "serve-favicon": "^2.2.0"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "npm run minify && node app.js",
+    "minify": "./node_modules/clean-css/bin/cleancss -o public/styles/parking.css public/styles/parking.css"
   }
 }
