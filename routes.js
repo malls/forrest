@@ -63,6 +63,10 @@ var friends = [
         text: 'kerry doran'
     },
     {
+        url: 'http://kalliopimathios.com/',
+        text: 'kalliopi mathios'
+    },
+    {
         url: 'http://mikepepi.com/',
         text: 'mike pepi'
     },
