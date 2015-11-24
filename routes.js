@@ -36,17 +36,25 @@ router.get('/guestbook', function(req, res) {
 router.post('/guestbook', function(req, res) {
     var marble = lib.getRandomFile(files);
     var body = req.body;
+    body.ts = Date.now();
     body.site = lib.makeUrl(body.site);
-    var entry = new guestbook.Entry(body);
-    entry.save(function (err) {
-        if (err) {
-            res.render('404', {marble: marble});
-        } else {
-            guestbook.Entry.find().exec(function(err, docs) {
-                res.render('guestbook', {entries: docs, marble: marble});
-            })
-        }
-    });
+    if (!body.message || !body.name) {
+        guestbook.Entry.find().exec(function(err, docs) {
+            res.render('guestbook', {entries: docs.reverse(), marble: marble});
+        });
+    } else {
+        var entry = new guestbook.Entry(body);
+        entry.save(function (err) {
+            if (err) {
+                res.render('404', {marble: marble});
+            } else {
+                guestbook.Entry.find().exec(function(err, docs) {
+                    console.log(docs);
+                    res.render('guestbook', {entries: docs.reverse(), marble: marble});
+                })
+            }
+        });
+    }
 
 });
 
