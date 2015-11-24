@@ -1,0 +1,31 @@
+extends main
+
+block content
+
+    h2 sign my guestbook!
+    form(action="guestbook" method="post")
+        label name:
+        br
+        input(type="text" name="name")
+        br
+        label email:
+        br
+        input(type="text" name="email")
+        br      
+        label website:
+        br
+        input(type="text" name="site")
+        br
+        label message:
+        br
+        textarea(name="message")
+        input(type="submit" value="submit")
+
+        br
+        br
+        each entry in entries
+            div(class="guestbook")
+                a(href="#{entry.site}") #{entry.name}
+                p   #{entry.message}
+            br
+            br

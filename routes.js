@@ -2,6 +2,7 @@ var express = require('express');
 var fs = require('fs-extended');
 var router = express.Router();
 var lib = require('./lib/library');
+var guestbook = require('./lib/guestbook');
 var files = fs.readdirSync('./public/images/marble/');
 
 /* GET home page. */
@@ -26,15 +27,28 @@ router.get('/press', function(req, res) {
 });
 
 router.get('/guestbook', function(req, res) {
-    var marble = getMarble();
-    res.render('guestbook', {entries: entries, marble: marble});
+    var marble = lib.getRandomFile(files);
+    guestbook.Entry.find().exec(function(err, doc) {
+        res.render('guestbook', {entries: doc, marble: marble});
+    });
 });
 
-router.post('/guesbook', function(req, res) {
-    var marble = getMarble();
-    res.render('guestbook', {entries: entries, marble: marble});
+router.post('/guestbook', function(req, res) {
+    var marble = lib.getRandomFile(files);
+    var body = req.body;
+    body.site = lib.makeUrl(body.site);
+    var entry = new guestbook.Entry(body);
+    entry.save(function (err) {
+        if (err) {
+            res.render('404', {marble: marble});
+        } else {
+            guestbook.Entry.find().exec(function(err, docs) {
+                res.render('guestbook', {entries: docs, marble: marble});
+            })
+        }
+    });
+
 });
-    
 
 // router.get('/persona', function(req, res) {
 //     var images = new Array();
