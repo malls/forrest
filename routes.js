@@ -1,14 +1,20 @@
+'use strict';
+
 var express = require('express');
 var fs = require('fs-extended');
 var router = express.Router();
 var lib = require('./lib/library');
 var guestbook = require('./lib/guestbook');
+// var hits = require('./lib/hits');
 var files = fs.readdirSync('./public/images/marble/');
 
 /* GET home page. */
 router.get('/', function(req, res) {
     var marble = lib.getRandomFile(files);
-    res.render('parking', {marble: marble});
+    // hits.Hit.find().exec(function(err, doc) {
+        res.render('parking', {marble: marble});
+        // res.render('parking', {marble: marble, hits: lib.numberSuffixer(doc.length)});
+    // });
 });
 
 router.get('/friends', function(req, res) {
@@ -49,7 +55,6 @@ router.post('/guestbook', function(req, res) {
                 res.render('404', {marble: marble});
             } else {
                 guestbook.Entry.find().exec(function(err, docs) {
-                    console.log(docs);
                     res.render('guestbook', {entries: docs.reverse(), marble: marble});
                 })
             }
