@@ -27,6 +27,20 @@ router.get('/links', function(req, res) {
     res.render('links', {marble: marble, links: lib.links, heading: 'please enjoy these links to stuff by me'});
 });
 
+router.get('/mirror', function(req, res) {
+    res.render('mirror');
+});
+
+router.get('/blog', function(req, res) {
+    var marble = lib.getRandomFile(files);
+    res.render('links', {marble: marble, links: lib.blogs, heading: 'here are some blogs'});
+});
+
+router.get('/blog/:name', function(req, res) {
+    var marble = lib.getRandomFile(files);
+    res.send()
+});
+
 router.get('/press', function(req, res) {
     var marble = lib.getRandomFile(files);
     res.render('links', {marble: marble, links: lib.press, heading: 'stuff written about things i\'ve done'});

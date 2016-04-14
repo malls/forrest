@@ -1,0 +1,11 @@
+doctype html
+html
+	head
+		title mirror
+		link(rel='stylesheet', href='/styles/mirror.css')
+		script(src='//localhost:9090')
+		script(src='/vendor/tracking/src/tracking.js')
+		script(src='/scripts/mirror.js')
+	body
+		video(id="video" width="1000" height="800" preload autoplay loop muted)
+		canvas(id="canvas" width="1000" height="800")

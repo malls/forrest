@@ -13,7 +13,11 @@
     "serve-favicon": "^2.2.0"
   },
   "scripts": {
-    "start": "npm run minify && node app.js",
+    "start": "npm run minify && live-reload & node app.js",
+    "live-reload": "./node_modules/live-reload/bin/reload.js --port 9091 public/ views/",
     "minify": "./node_modules/clean-css/bin/cleancss -o public/styles/parking.css public/styles/parking.css"
+  },
+  "devDependencies": {
+    "live-reload": "^1.1.0"
   }
 }
