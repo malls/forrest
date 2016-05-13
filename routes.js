@@ -47,40 +47,38 @@ router.get('/press', function(req, res) {
     });
 });
 
-router.get('/guestbook/:id', function(req, res) {
+router.get('/guestbook', function(req, res) {
     var marble = lib.getRandomFile(files);
-    console.log('params on get guestbook', req.params.id);
-    if (req.params.id) {
-        guestbook.Entry.remove({
-            _id: req.params.id
-        }, function(err) {
-            if (err) {
-                res.render('404', {
-                    marble: marble
-                });
-            } else {
-                guestbook.Entry.find().exec(function(err, docs) {
-                    console.log(docs);
-                    res.render('guestbook', {
-                        entries: docs.reverse(),
-                        marble: marble
-                    });
-                });
-            }
-
+    guestbook.Entry.find().limit(25).exec(function(err, doc) {
+        if (err) throw err;
+        res.render('guestbook', {
+            entries: doc,
+            marble: marble
         });
-    } else {
-        guestbook.Entry.find().limit(25).exec(function(err, doc) {
-            if (err) throw err;
-            res.render('guestbook', {
-                entries: doc,
-                marble: marble
-            });
-        });
-    }
+    });
 });
 
+router.get('/guestbook/:id', function(req, res) {
+    var marble = lib.getRandomFile(files);
+    guestbook.Entry.remove({
+        _id: req.params.id
+    }, function(err) {
+        if (err) {
+            res.render('404', {
+                marble: marble
+            });
+        } else {
+            guestbook.Entry.find().exec(function(err, docs) {
+                console.log(docs);
+                res.render('guestbook', {
+                    entries: docs.reverse(),
+                    marble: marble
+                });
+            });
+        }
 
+    });
+});
 
 router.post('/guestbook', function(req, res) {
     var marble = lib.getRandomFile(files);
