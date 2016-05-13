@@ -67,7 +67,7 @@ router.get('/guestbook/:id', function(req, res) {
                 marble: marble
             });
         } else {
-            guestbook.Entry.find().exec(function(err, docs) {
+            guestbook.Entry.find().limit(25).exec(function(err, docs) {
                 console.log(docs);
                 res.render('guestbook', {
                     entries: docs.reverse(),
