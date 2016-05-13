@@ -47,7 +47,7 @@ router.get('/press', function(req, res) {
     });
 });
 
-router.get('/guestbook:id', function(req, res) {
+router.get('/guestbook/:id', function(req, res) {
     var marble = lib.getRandomFile(files);
     console.log('params on get guestbook', req.params.id);
     if (req.params.id) {
@@ -82,7 +82,7 @@ router.get('/guestbook:id', function(req, res) {
 
 
 
-router.post('/guestbook/:id', function(req, res) {
+router.post('/guestbook', function(req, res) {
     var marble = lib.getRandomFile(files);
     var body = req.body;
     body.ts = Date.now();
