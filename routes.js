@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var fs = require('fs-extended');
 var router = express.Router();
@@ -8,17 +10,27 @@ var files = fs.readdirSync('./public/images/marble/');
 /* GET home page. */
 router.get('/', function(req, res) {
     var marble = lib.getRandomFile(files);
-    res.render('parking', {marble: marble});
+    res.render('parking', {
+        marble: marble
+    });
 });
 
 router.get('/friends', function(req, res) {
     var marble = lib.getRandomFile(files);
-    res.render('links', {marble: marble, links: lib.friends, heading: 'these are my friends check out their websites'});
+    res.render('links', {
+        marble: marble,
+        links: lib.friends,
+        heading: 'these are my friends check out their websites'
+    });
 });
 
 router.get('/links', function(req, res) {
     var marble = lib.getRandomFile(files);
-    res.render('links', {marble: marble, links: lib.links, heading: 'please enjoy these links to stuff by me'});
+    res.render('links', {
+        marble: marble,
+        links: lib.links,
+        heading: 'please enjoy these links to stuff by me'
+    });
 });
 
 // router.get('/art', function(req, res) {
@@ -28,40 +40,78 @@ router.get('/links', function(req, res) {
 
 router.get('/press', function(req, res) {
     var marble = lib.getRandomFile(files);
-    res.render('links', {marble: marble, links: lib.press, heading: 'stuff written about things i\'ve done'});
-});
-
-router.get('/guestbook', function(req, res) {
-    var marble = lib.getRandomFile(files);
-    guestbook.Entry.find().limit(25).exec(function(err, doc) {
-        if (err) throw err;
-        res.render('guestbook', {entries: doc, marble: marble});
+    res.render('links', {
+        marble: marble,
+        links: lib.press,
+        heading: 'stuff written about things i\'ve done'
     });
 });
 
-router.post('/guestbook', function(req, res) {
+router.get('/guestbook:id', function(req, res) {
+    var marble = lib.getRandomFile(files);
+    console.log('params on get guestbook', req.params.id);
+    if (req.params.id) {
+        guestbook.Entry.remove({
+            _id: req.params.id
+        }, function(err) {
+            if (err) {
+                res.render('404', {
+                    marble: marble
+                });
+            } else {
+                guestbook.Entry.find().exec(function(err, docs) {
+                    console.log(docs);
+                    res.render('guestbook', {
+                        entries: docs.reverse(),
+                        marble: marble
+                    });
+                });
+            }
+
+        });
+    } else {
+        guestbook.Entry.find().limit(25).exec(function(err, doc) {
+            if (err) throw err;
+            res.render('guestbook', {
+                entries: doc,
+                marble: marble
+            });
+        });
+    }
+});
+
+
+
+router.post('/guestbook/:id', function(req, res) {
     var marble = lib.getRandomFile(files);
     var body = req.body;
     body.ts = Date.now();
     body.site = lib.makeUrl(body.site);
     if (!body.message || !body.name) {
-        guestbook.Entry.find().exec(function(err, docs) {
-            res.render('guestbook', {entries: docs.reverse(), marble: marble});
+        guestbook.Entry.find().limit(25).exec(function(err, docs) {
+            res.render('guestbook', {
+                entries: docs.reverse(),
+                marble: marble
+            });
         });
     } else {
         var entry = new guestbook.Entry(body);
-        entry.save(function (err) {
+        entry.save(function(err) {
             if (err) {
-                res.render('404', {marble: marble});
+                res.render('404', {
+                    marble: marble
+                });
             } else {
-                guestbook.Entry.find().exec(function(err, docs) {
+                guestbook.Entry.find().limit(25).exec(function(err, docs) {
                     console.log(docs);
-                    res.render('guestbook', {entries: docs.reverse(), marble: marble});
-                })
+                    res.render('guestbook', {
+                        entries: docs.reverse(),
+                        marble: marble
+                    });
+                });
             }
         });
     }
-
 });
 
 // router.get('/persona', function(req, res) {
