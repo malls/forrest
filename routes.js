@@ -48,48 +48,22 @@ router.get('/press', function(req, res) {
 });
 
 router.get('/guestbook', function(req, res) {
-    var marble = lib.getRandomFile(files);
-    guestbook.Entry.find().limit(25).exec(function(err, doc) {
-        if (err) throw err;
-        res.render('guestbook', {
-            entries: doc,
-            marble: marble
-        });
-    });
+    guestbook.render(res);
 });
 
 router.get('/guestbook/:id', function(req, res) {
-    var marble = lib.getRandomFile(files);
     guestbook.Entry.findByIdAndRemove(req.params.id, function(err) {
-        if (err) {
-            console.log('Error deleting guestbook comment ' + req.params.id +': ' + err);
-            res.render('404', {
-                marble: marble
-            });
-        } else {
-            guestbook.Entry.find().limit(25).exec(function(err, docs) {
-                console.log(docs);
-                res.render('guestbook', {
-                    entries: docs.reverse(),
-                    marble: marble
-                });
-            });
-        }
+        if (err) console.log(err);
+        res.redirect('/guestbook');
     });
 });
 
 router.post('/guestbook', function(req, res) {
-    var marble = lib.getRandomFile(files);
     var body = req.body;
     body.ts = Date.now();
     body.site = lib.makeUrl(body.site);
     if (!body.message || !body.name) {
-        guestbook.Entry.find().limit(25).exec(function(err, docs) {
-            res.render('guestbook', {
-                entries: docs.reverse(),
-                marble: marble
-            });
-        });
+        guestbook.render(res);
     } else {
         var entry = new guestbook.Entry(body);
         entry.save(function(err) {
@@ -98,13 +72,7 @@ router.post('/guestbook', function(req, res) {
                     marble: marble
                 });
             } else {
-                guestbook.Entry.find().limit(25).exec(function(err, docs) {
-                    console.log(docs);
-                    res.render('guestbook', {
-                        entries: docs.reverse(),
-                        marble: marble
-                    });
-                });
+                guestbook.render(res);
             }
         });
     }
