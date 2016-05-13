@@ -33,7 +33,8 @@ router.get('/press', function(req, res) {
 
 router.get('/guestbook', function(req, res) {
     var marble = lib.getRandomFile(files);
-    guestbook.Entry.find({qty: 25}).exec(function(err, doc) {
+    guestbook.Entry.find().limit(25).exec(function(err, doc) {
+        if (err) throw err;
         res.render('guestbook', {entries: doc, marble: marble});
     });
 });
