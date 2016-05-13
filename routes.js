@@ -21,6 +21,11 @@ router.get('/links', function(req, res) {
     res.render('links', {marble: marble, links: lib.links, heading: 'please enjoy these links to stuff by me'});
 });
 
+// router.get('/art', function(req, res) {
+//     var marble = lib.getRandomFile(files);
+//     res.render('links', {marble: marble, links: lib.art, heading: 'here is some art i made'});
+// });
+
 router.get('/press', function(req, res) {
     var marble = lib.getRandomFile(files);
     res.render('links', {marble: marble, links: lib.press, heading: 'stuff written about things i\'ve done'});
@@ -28,7 +33,7 @@ router.get('/press', function(req, res) {
 
 router.get('/guestbook', function(req, res) {
     var marble = lib.getRandomFile(files);
-    guestbook.Entry.find().exec(function(err, doc) {
+    guestbook.Entry.find({qty: 25}).exec(function(err, doc) {
         res.render('guestbook', {entries: doc, marble: marble});
     });
 });
