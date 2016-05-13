@@ -60,10 +60,9 @@ router.get('/guestbook', function(req, res) {
 
 router.get('/guestbook/:id', function(req, res) {
     var marble = lib.getRandomFile(files);
-    guestbook.Entry.remove({
-        _id: req.params.id
-    }, function(err) {
+    guestbook.Entry.findByIdAndRemove(req.params.id, function(err) {
         if (err) {
+            console.log('Error deleting guestbook comment ' + req.params.id +': ' + err);
             res.render('404', {
                 marble: marble
             });
@@ -76,7 +75,6 @@ router.get('/guestbook/:id', function(req, res) {
                 });
             });
         }
-
     });
 });
 
