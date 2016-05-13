@@ -59,6 +59,7 @@ router.get('/guestbook/:id', function(req, res) {
 });
 
 router.post('/guestbook', function(req, res) {
+    console.log('new comment', req.body);
     var body = req.body;
     body.ts = Date.now();
     body.site = lib.makeUrl(body.site);
