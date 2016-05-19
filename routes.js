@@ -15,6 +15,13 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/bio', function(req, res) {
+    var marble = lib.getRandomFile(files);
+    res.render('bio', {
+        marble: marble
+    });
+});
+
 router.get('/friends', function(req, res) {
     var marble = lib.getRandomFile(files);
     res.render('links', {
@@ -59,7 +66,18 @@ router.get('/guestbook/:id', function(req, res) {
 });
 
 router.post('/guestbook', function(req, res) {
+    var marble = lib.getRandomFile(files);
+
     console.log('new comment', req.body);
+
+
+    if (req.body.message.indexOf('http') > -1 && !req.body.email) {
+        res.render('404', {
+            marble: marble
+        });
+        return;
+    }
+
     var body = req.body;
     body.ts = Date.now();
     body.site = lib.makeUrl(body.site);

@@ -17,7 +17,8 @@
     "serve-favicon": "^2.2.0"
   },
   "scripts": {
-    "start": "npm run minify && node app.js",
+    "start": "node app.js",
+    "develop": "npm run minify && node app.js",
     "minify": "cat public/styles/*.scss | node-sass | postcss --use autoprefixer | cleancss -o public/styles/min.css"
   }
 }
