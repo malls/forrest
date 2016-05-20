@@ -70,8 +70,7 @@ router.post('/guestbook', function(req, res) {
 
     console.log('new comment', req.body);
 
-
-    if (req.body.message.indexOf('http') > -1 && !req.body.email) {
+    if (req.body.message.indexOf('http') > -1) {
         res.render('404', {
             marble: marble
         });
