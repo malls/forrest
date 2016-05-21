@@ -6,7 +6,7 @@ block content
         form(action="guestbook" method="post")
             label name:
             br
-            input(type="text" name="name")
+            input(type="text" name="name" required)
             br
             label email:
             br
@@ -18,9 +18,8 @@ block content
             br
             label message:
             br
-            textarea(name="message")
+            textarea(name="message" required)
             input(type="submit" value="submit")
-
             br
             br
         div(class="scrolls")
@@ -33,6 +32,6 @@ block content
                             span #{entry.name} on #{entry.ts.toDateString()}
                         p #{entry.message}
                         br
-                        a(href="/guestbook/#{entry._id}") delete
+                        //- a(href="/guestbook/#{entry._id}") delete
                     br
                     br

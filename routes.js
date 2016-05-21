@@ -77,15 +77,17 @@ router.get('/guestbook/:id', function(req, res) {
 
 router.post('/guestbook', function(req, res) {
     var marble = lib.getRandomFile(files);
+    var body = req.body;
 
-    if (req.body.message.indexOf('http') > -1 && !req.body.email) {
+    console.log('new comment', body);
+
+    if (body.message.indexOf('http') > -1) {
         res.render('404', {
             marble: marble
         });
         return;
     }
 
-    var body = req.body;
     body.ts = Date.now();
     body.site = lib.makeUrl(body.site);
     if (!body.message || !body.name) {
