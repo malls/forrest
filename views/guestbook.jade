@@ -32,5 +32,7 @@ block content
                         else
                             span #{entry.name} on #{entry.ts.toDateString()}
                         p #{entry.message}
+                        br
+                        a(href="/guestbook/#{entry._id}") delete
                     br
                     br
