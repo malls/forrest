@@ -79,8 +79,6 @@ router.post('/guestbook', function(req, res) {
     var marble = lib.getRandomFile(files);
     var body = req.body;
 
-    console.log('new comment', body);
-
     if (body.message.indexOf('http') > -1) {
         res.render('404', {
             marble: marble
