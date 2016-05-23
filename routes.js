@@ -50,10 +50,10 @@ router.get('/links', function(req, res) {
 //     res.render('links', {marble: marble, links: lib.blogs, heading: 'here are some blogs'});
 // });
 
-router.get('/blog/:name', function(req, res) {
-    var marble = lib.getRandomFile(files);
-    res.send()
-});
+// router.get('/blog/:name', function(req, res) {
+//     var marble = lib.getRandomFile(files);
+//     res.send()
+// });
 
 router.get('/press', function(req, res) {
     var marble = lib.getRandomFile(files);
