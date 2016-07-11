@@ -64,45 +64,45 @@ router.get('/press', function(req, res) {
     });
 });
 
-router.get('/guestbook', function(req, res) {
-    guestbook.render(res);
-});
+// router.get('/guestbook', function(req, res) {
+//     guestbook.render(res);
+// });
 
-router.get('/guestbook/:id', function(req, res) {
-    guestbook.Entry.findByIdAndRemove(req.params.id, function(err) {
-        if (err) console.log(err);
-        res.redirect('/guestbook');
-    });
-});
+// router.get('/guestbook/:id', function(req, res) {
+//     guestbook.Entry.findByIdAndRemove(req.params.id, function(err) {
+//         if (err) console.log(err);
+//         res.redirect('/guestbook');
+//     });
+// });
 
-router.post('/guestbook', function(req, res) {
-    var marble = lib.getRandomFile(files);
-    var body = req.body;
+// router.post('/guestbook', function(req, res) {
+//     var marble = lib.getRandomFile(files);
+//     var body = req.body;
 
-    if (body.message.indexOf('http') > -1) {
-        res.render('404', {
-            marble: marble
-        });
-        return;
-    }
+//     if (body.message.indexOf('http') > -1) {
+//         res.render('404', {
+//             marble: marble
+//         });
+//         return;
+//     }
 
-    body.ts = Date.now();
-    body.site = lib.makeUrl(body.site);
-    if (!body.message || !body.name) {
-        guestbook.render(res);
-    } else {
-        var entry = new guestbook.Entry(body);
-        entry.save(function(err) {
-            if (err) {
-                res.render('404', {
-                    marble: marble
-                });
-            } else {
-                guestbook.render(res);
-            }
-        });
-    }
-});
+//     body.ts = Date.now();
+//     body.site = lib.makeUrl(body.site);
+//     if (!body.message || !body.name) {
+//         guestbook.render(res);
+//     } else {
+//         var entry = new guestbook.Entry(body);
+//         entry.save(function(err) {
+//             if (err) {
+//                 res.render('404', {
+//                     marble: marble
+//                 });
+//             } else {
+//                 guestbook.render(res);
+//             }
+//         });
+//     }
+// });
 
 // router.get('/persona', function(req, res) {
 //     var images = new Array();
